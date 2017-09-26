@@ -221,11 +221,11 @@ int avc_init(const char *prefix,
 	if (!avc_setenforce) {
 		rc = security_getenforce();
 		if (rc < 0) {
-			avc_log(SELINUX_ERROR,
+			avc_log(SELINUX_WARNING,
 				"%s:  could not determine enforcing mode: %s\n",
 				avc_prefix,
 				strerror(errno));
-			goto out;
+			rc = 0;
 		}
 		avc_enforcing = rc;
 	}
